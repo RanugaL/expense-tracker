@@ -5,6 +5,7 @@ if __name__ == '__main__':
                  "s - show expense report",
                  "t - show total expenses",
                  "c - show expenses for category",
+                 "r - view expense report",
                  "q - Exit app"]
     while True:
         print()
@@ -26,6 +27,8 @@ if __name__ == '__main__':
         elif operation == 'c':
             category= input("Enter category: ").lower()
             utils.show_total_expenses(category)
+        elif operation == 'r':
+            utils.show_expense_report()
         elif operation == 'q':
             print("Exiting...")
             break

@@ -1,5 +1,7 @@
 import csv
 from datetime import datetime
+from matplotlib import pyplot as plt
+import numpy as np
 
 def add_expense(amount, category):
     """opens the data file and appends the new expense with the date"""
@@ -27,3 +29,17 @@ def show_total_expenses(category = None):
             else:
                 expenses += float(row[2])
         print(f"Expenses: Rs.{expenses:.2f}")
+
+def show_expense_report():
+    x = []
+    y = []
+    with open("data.csv",'r') as file:
+        reader = csv.reader(file)
+        for row in reader:
+            x.append(row[1])
+            y.append(row[2])
+        x = np.array(x)
+        y = np.array(y)
+
+        plt.bar(x,y)
+        plt.show()
