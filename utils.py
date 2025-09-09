@@ -3,6 +3,8 @@ from datetime import datetime
 from matplotlib import pyplot as plt
 import numpy as np
 
+import helpers
+
 fieldnames = ['date', 'category', 'amount']
 
 def get_file():
@@ -76,3 +78,4 @@ def show_expense_report(filename):
         plt.xlabel('Category')
         plt.ylabel('Amount (Rs.)')
         plt.show()
+
