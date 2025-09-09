@@ -3,8 +3,6 @@ from datetime import datetime
 from matplotlib import pyplot as plt
 import numpy as np
 
-import helpers
-
 fieldnames = ['date', 'category', 'amount']
 
 def get_file():
@@ -63,19 +61,24 @@ def show_total_expenses(filename, Category = None,):
         print(f"Expenses: Rs.{expenses:.2f}")
 
 def show_expense_report(filename):
-    x = []
-    y = []
+    values = {}
     with open(filename, 'r') as file:
         reader = csv.DictReader(file)
         for row in reader:
-            x.append(row["category"])
-            y.append(float(row["amount"]))
-        x = np.array(x)
-        y = np.array(y)
+            values[row["category"]] = values[row["category"]] + float(row["amount"]) if row["category"] in values else float(row["amount"])
 
-        plt.bar(x,y)
+        x = np.array(list(values.keys()))
+        y = np.array(list(values.values()))
+
+        plt.bar(x,y,color="crimson")
+        add_labels(x, y)
         plt.title(f'Expense Report of {filename}')
         plt.xlabel('Category')
         plt.ylabel('Amount (Rs.)')
+
+        plt.tight_layout()
         plt.show()
 
+def add_labels(x, y):
+    for i in range(len(x)):
+        plt.text(i, y[i], y[i], ha='center')
