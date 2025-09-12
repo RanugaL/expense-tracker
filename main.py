@@ -30,7 +30,13 @@ if __name__ == '__main__':
             category= input("Enter category: ").lower()
             utils.show_total_expenses(filename, category)
         elif operation == 'r':
-            utils.show_expense_report(filename)
+            print("1 - Categoric Report\n" + "2 - Monthly Report")
+            report_choice = input("Enter your choice (1/2): ")
+            if report_choice == "1":
+                utils.show_categoric_report(filename)
+            else:
+                year = int(input("Enter your desired year: "))
+                utils.show_timely_report(filename, year)
         elif operation == 'q':
             print("Exiting...")
             break
