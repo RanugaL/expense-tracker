@@ -10,7 +10,7 @@ fieldnames = ['date', 'category', 'amount']
 def get_file():
     while True:
         file_id = input("Enter your id: ")
-        name = file_id + ".csv"
+        name = 'data/' + file_id + ".csv"
         try:
             with open(name,"r"):
                 return name
