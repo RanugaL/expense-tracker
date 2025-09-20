@@ -1,4 +1,4 @@
-import utils
+import utils, db
 
 if __name__ == '__main__':
     interface = ["n - add new expense",
@@ -8,7 +8,8 @@ if __name__ == '__main__':
                  "r - view expense report",
                  "q - Exit app"]
 
-    filename = utils.get_file()
+    database = db.init_db()
+
     while True:
         print()
         for row in interface:

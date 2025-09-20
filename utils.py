@@ -2,8 +2,8 @@ import csv
 from datetime import datetime
 from matplotlib import pyplot as plt
 import numpy as np
-
 import helpers
+
 
 fieldnames = ['date', 'category', 'amount']
 

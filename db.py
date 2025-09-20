@@ -17,3 +17,17 @@ def init_db():
             )
         ''')
         conn.commit()
+
+def add_expense(date,category,amount,desc=""):
+    with get_connection() as conn:
+        conn.execute('''
+        INSERT INTO expenses (date,category,amount,description) 
+        VALUES(?,?,?,?)
+        ''', (date, category, amount, desc))
+        conn.commit()
+
+def get_all_expenses():
+    with (get_connection() as conn):
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM expenses')
+        return cursor.fetchall()
