@@ -8,7 +8,7 @@ if __name__ == '__main__':
                  "r - view expense report",
                  "q - Exit app"]
 
-    database = db.init_db()
+    db.init_db()
 
     while True:
         print()
