@@ -2,38 +2,31 @@ import csv
 from datetime import datetime
 from matplotlib import pyplot as plt
 import numpy as np
-import helpers
+import helpers,db
 
 
 fieldnames = ['date', 'category', 'amount']
 
-def get_file():
+def get_username():
     while True:
-        file_id = input("Enter your id: ")
-        name = 'data/' + file_id + ".csv"
-        try:
-            with open(name,"r"):
-                return name
-        except FileNotFoundError:
-            new = input(f"File does not exist. Do you want to track one with id {file_id}? (y/n): ").lower()
+        username = input("Enter your username: ").lower()
+
+        if not db.user_exists(username):
+            new = input(f"Username does not exist. Do you want to create profile for  {username}? (y/n): ").lower()
             if new == 'y':
-                initialise_file(name)
+                initialise_profile(username)
             elif new == 'n':
                 pass
             else:
                 print("Invalid response. Try again.!")
+        else:
+            return username
 
-def initialise_file(name):
-    """Initialises the csv file given as name by inserting headers"""
+def initialise_profile(username):
+    """Inserts a profile into the db with username given"""
 
-    # Define header values
-    header = fieldnames
-
-    # Opens File and initialises it with headers
-    with open(name,'w',newline='\n') as file:
-        writer = csv.writer(file)
-        writer.writerow(header)
-    print(f"File {name} was created successfully")
+    db.add_new_profile(username)
+    print(f"Profile for {username} was created successfully")
 
 def add_expense(amount, Category,filename):
     """opens the data file and appends the new expense with the date"""

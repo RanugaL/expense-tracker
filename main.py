@@ -10,6 +10,8 @@ if __name__ == '__main__':
 
     db.init_db()
 
+    user_name = utils.get_username()
+
     while True:
         print()
         for row in interface:

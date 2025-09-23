@@ -45,6 +45,12 @@ def get_all_expenses():
         cursor.execute('SELECT * FROM expenses')
         return cursor.fetchall()
 
+def add_new_profile(username):
+    with get_connection() as conn:
+        cursor = conn.cursor()
+        cursor.execute('INSERT INTO profile (username) VALUES (?)',username)
+        conn.commit()
+
 def get_all_usernames():
     with (get_connection() as conn):
         cursor = conn.cursor()
