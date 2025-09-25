@@ -13,42 +13,42 @@ def init_db():
         c.execute('''
         CREATE TABLE IF NOT EXISTS profile(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            username TEXT NOT NULL 
+            username TEXT NOT NULL UNIQUE 
             )
         ''')
 
         c.execute('''
         CREATE TABLE IF NOT EXISTS expenses(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL,
+            userid INTEGER NOT NULL,
             date TEXT NOT NULL,
             category TEXT NOT NULL,
             amount REAL NOT NULL, 
             description TEXT, 
-            FOREIGN KEY(user_id) REFERENCES profile(id)
+            FOREIGN KEY(userid) REFERENCES profile(id)
             )
         ''')
 
         conn.commit()
 
-def add_expense(date,category,amount,desc=""):
+def add_expense(user_id,date,category,amount,desc=""):
     with get_connection() as conn:
         conn.execute('''
-        INSERT INTO expenses (date,category,amount,description) 
-        VALUES(?,?,?,?)
-        ''', (date, category, amount, desc))
+        INSERT INTO expenses (userid,date,category,amount,description) 
+        VALUES(?,?,?,?,?)
+        ''', (user_id,date, category, amount, desc))
         conn.commit()
 
-def get_all_expenses():
+def get_all_expenses(user_id):
     with (get_connection() as conn):
         cursor = conn.cursor()
-        cursor.execute('SELECT * FROM expenses')
+        cursor.execute('SELECT * FROM expenses WHERE userid = ?',(user_id,))
         return cursor.fetchall()
 
 def add_new_profile(username):
     with get_connection() as conn:
         cursor = conn.cursor()
-        cursor.execute('INSERT INTO profile (username) VALUES (?)',username)
+        cursor.execute('INSERT INTO profile (username) VALUES (?)',(username,))
         conn.commit()
 
 def get_all_usernames():
@@ -57,8 +57,17 @@ def get_all_usernames():
         cursor.execute('SELECT username FROM profile')
         return cursor.fetchall()
 
-def user_exists(username):
+def get_profile(username):
     with (get_connection() as conn):
         cursor = conn.cursor()
-        cursor.execute('SELECT username FROM profile WHERE username = ?',username)
+        cursor.execute('SELECT id,username FROM profile WHERE username = ?',(username,))
         return cursor.fetchall()
+
+def get_expenses_grouped_by_category(user_id):
+    with(get_connection() as conn):
+        cursor = conn.cursor()
+        cursor.execute('''
+        SELECT category, SUM(amount) FROM expenses
+        WHERE userid = ?
+        GROUP BY category
+        ''', (user_id,))

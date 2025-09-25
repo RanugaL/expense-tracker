@@ -4,56 +4,23 @@ from matplotlib import pyplot as plt
 import numpy as np
 import helpers,db
 
-
-fieldnames = ['date', 'category', 'amount']
-
-def get_username():
+def get_user():
     while True:
         username = input("Enter your username: ").lower()
 
-        if not db.user_exists(username):
+        user_query = db.get_profile(username)
+        if not user_query :
             new = input(f"Username does not exist. Do you want to create profile for  {username}? (y/n): ").lower()
             if new == 'y':
-                initialise_profile(username)
+                db.add_new_profile(username)
+                print(f"Profile for {username} was created successfully")
             elif new == 'n':
                 pass
             else:
                 print("Invalid response. Try again.!")
         else:
-            return username
+            return user_query
 
-def initialise_profile(username):
-    """Inserts a profile into the db with username given"""
-
-    db.add_new_profile(username)
-    print(f"Profile for {username} was created successfully")
-
-def add_expense(amount, Category,filename):
-    """opens the data file and appends the new expense with the date"""
-    with open(filename, 'a',newline="\n") as file:
-        expense_writer  = csv.DictWriter(file, fieldnames=fieldnames)
-        expense_writer.writerow({'date':datetime.today().strftime("%d-%m-%y"),'category':Category,'amount':amount})
-
-def view_expenses(filename):
-    """opens the data file and outputs each row in it"""
-    with open(filename,'r') as file:
-        reader = csv.DictReader(file)
-        for row in reader:
-            print(row)
-
-def show_total_expenses(filename, Category = None,):
-    """Calculates and prints the total of all expenses by category,
-    or if none are given, all records"""
-    with open(filename,'r') as file:
-        reader = csv.DictReader(file)
-        expenses = 0
-        for row in reader:
-            if Category is not None:
-                if row["category"] == Category:
-                    expenses += float(row["amount"])
-            else:
-                expenses += float(row["amount"])
-        print(f"Expenses: Rs.{expenses:.2f}")
 
 def show_categoric_report(filename):
     values = {}
@@ -101,3 +68,19 @@ def show_timely_report(filename,year):
 
         plt.show()
 
+
+def input_amount(prompt):
+    amount = input(prompt)
+    try:
+        amount = float(amount)
+    except (TypeError, ValueError):
+        return -1
+    else :
+        if amount > 0 :
+            return amount
+        else:
+            return -2
+
+
+def get_today():
+    return datetime.today().strftime("%d-%m-%y")
