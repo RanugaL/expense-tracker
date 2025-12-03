@@ -36,48 +36,56 @@ def init_db():
 
 
 # TABLE: EXPENSES
-    def add_expense(user_id,date,category,amount,desc=""):
-        with get_connection() as conn:
-            conn.execute('''
-            INSERT INTO expenses (userid,date,category,amount,description) 
-            VALUES(?,?,?,?,?)
-            ''', (user_id,date, category, amount, desc))
-            conn.commit()
+def add_expense(user_id,date,category,amount,desc=""):
+    with get_connection() as conn:
+        conn.execute('''
+        INSERT INTO expenses (userid,date,category,amount,description) 
+        VALUES(?,?,?,?,?)
+        ''', (user_id,date, category, amount, desc))
+        conn.commit()
 
-    def get_all_expenses(user_id):
-        with (get_connection() as conn):
-            cursor = conn.cursor()
-            cursor.execute('SELECT * FROM expenses WHERE userid = ?',(user_id,))
-            return cursor.fetchall()
+def get_all_expenses(user_id):
+    with (get_connection() as conn):
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM expenses WHERE userid = ?',(user_id,))
+        return cursor.fetchall()
 
-    def get_expenses_grouped_by_category(user_id):
-        with(get_connection() as conn):
-            cursor = conn.cursor()
-            cursor.execute('''
-            SELECT category, SUM(amount) FROM expenses
-            WHERE userid = ?
-            GROUP BY category
-            ''', (user_id,))
+def get_expenses_grouped_by_category(user_id):
+    with(get_connection() as conn):
+        cursor = conn.cursor()
+        cursor.execute('''
+        SELECT category, SUM(amount) FROM expenses
+        WHERE userid = ?
+        GROUP BY category
+        ''', (user_id,))
+        return cursor.fetchall()
+
+def get_expenses_grouped_by_month(user_id, year):
+    with(get_connection() as conn):
+        cursor = conn.cursor()
+        cursor.execute('''
+        SELECT STRFTIME('%m', date) AS month, SUM(amount) as total FROM expenses
+        WHERE userid = ?
+        GROUP BY month
+        ''', (user_id,))
+        return cursor.fetchall()
 
 
 # TABLE: PROFILE
-    def add_new_profile(username):
-        with get_connection() as conn:
-            cursor = conn.cursor()
-            cursor.execute('INSERT INTO profile (username) VALUES (?)',(username,))
-            conn.commit()
+def add_new_profile(username):
+    with get_connection() as conn:
+        cursor = conn.cursor()
+        cursor.execute('INSERT INTO profile (username) VALUES (?)',(username,))
+        conn.commit()
 
-    def get_profile(username):
-        with (get_connection() as conn):
-            cursor = conn.cursor()
-            cursor.execute('SELECT id,username FROM profile WHERE username = ?',(username,))
-            return cursor.fetchall()
+def get_profile(username):
+    with (get_connection() as conn):
+        cursor = conn.cursor()
+        cursor.execute('SELECT id,username FROM profile WHERE username = ?',(username,))
+        return cursor.fetchall()
 
-    def get_all_usernames():
-        with (get_connection() as conn):
-            cursor = conn.cursor()
-            cursor.execute('SELECT username FROM profile')
-            return cursor.fetchall()
-
-
-
+def get_all_usernames():
+    with (get_connection() as conn):
+        cursor = conn.cursor()
+        cursor.execute('SELECT username FROM profile')
+        return cursor.fetchall()

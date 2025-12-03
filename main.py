@@ -1,12 +1,12 @@
-from tkinter.font import names
-
 import utils, db
+import charts
 
 def menu():
     print("1 - Add new expense")
     print("2 - List all expenses")
     print("3 - Delete an Expense")
-    print("4 - View expense report (chart)")
+    print("4 - View categoric report (chart)")
+    print("5 - View monthly report (chart)")
     print("0 - Exit App")
     return input("Choose an action: ")
 
@@ -60,6 +60,17 @@ def main():
         elif option == '4':
             # Plots a chart of total expenses for each category
             data_query = db.get_expenses_grouped_by_category(user_id)
+            charts.show_categoric_report(data_query, username)
+        elif option == '5':
+            # Plots a chart of total expenses for each month in a certain year
+            year = utils.get_year("Enter year: ")
+            if year == -1:
+                print("❌ Invalid Year")
+            elif year == -2:
+                print("❗ Year out of bounds(1950-2100)")
+            else:
+                data = db.get_expenses_grouped_by_month(user_id,year)
+                charts.show_timely_report(data,year)
 
         elif option == '0':
             print("Exiting...")
