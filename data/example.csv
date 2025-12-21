@@ -1,0 +1,179 @@
+date,category,amount
+02-01-24,Groceries,3500.0
+04-01-24,Fuel,7500.0
+08-01-24,Dining Out,4200.0
+12-01-24,Utilities,6800.0
+15-01-24,Shopping,12500.0
+20-01-24,Home Maintenance,8000.0
+25-01-24,Healthcare,3500.0
+28-01-24,Subscriptions,1200.0
+03-02-24,Groceries,4800.0
+07-02-24,Fuel,8100.0
+10-02-24,Entertainment,5500.0
+14-02-24,Gifts,15000.0
+18-02-24,Personal Care,2500.0
+22-02-24,Rent,25000.0
+26-02-24,Utilities,7100.0
+01-03-24,Groceries,4100.0
+05-03-24,Dining Out,5300.0
+09-03-24,Shopping,9800.0
+15-03-24,Education,10000.0
+20-03-24,Healthcare,4200.0
+24-03-24,Fuel,7800.0
+28-03-24,Rent,25000.0
+02-04-24,Groceries,3900.0
+06-04-24,Home Maintenance,7200.0
+10-04-24,Transportation,3500.0
+14-04-24,Utilities,6500.0
+18-04-24,Entertainment,6000.0
+22-04-24,Subscriptions,1200.0
+26-04-24,Shopping,11000.0
+30-04-24,Rent,25000.0
+05-05-24,Groceries,5200.0
+09-05-24,Fuel,8500.0
+14-05-24,Healthcare,4800.0
+18-05-24,Dining Out,5900.0
+23-05-24,Personal Care,3100.0
+27-05-24,Rent,25000.0
+31-05-24,Insurance,20000.0
+04-06-24,Groceries,4400.0
+08-06-24,Utilities,7000.0
+12-06-24,Travel,15000.0
+16-06-24,Shopping,13000.0
+20-06-24,Education,10000.0
+24-06-24,Fuel,8200.0
+28-06-24,Entertainment,5200.0
+02-07-24,Groceries,4600.0
+06-07-24,Rent,25000.0
+10-07-24,Dining Out,6100.0
+14-07-24,Home Maintenance,8500.0
+18-07-24,Healthcare,5500.0
+22-07-24,Fuel,7900.0
+26-07-24,Subscriptions,1200.0
+30-07-24,Gifts,10000.0
+03-08-24,Groceries,5500.0
+07-08-24,Utilities,7500.0
+11-08-24,Shopping,14500.0
+15-08-24,Entertainment,6500.0
+19-08-24,Personal Care,3400.0
+23-08-24,Rent,25000.0
+27-08-24,Transportation,4100.0
+01-09-24,Groceries,4900.0
+05-09-24,Fuel,8800.0
+09-09-24,Dining Out,6300.0
+13-09-24,Education,10000.0
+17-09-24,Healthcare,5800.0
+21-09-24,Travel,18000.0
+25-09-24,Rent,25000.0
+29-09-24,Insurance,20000.0
+04-10-24,Groceries,5100.0
+08-10-24,Utilities,7800.0
+12-10-24,Home Maintenance,9000.0
+16-10-24,Shopping,15500.0
+20-10-24,Entertainment,6800.0
+24-10-24,Fuel,8500.0
+28-10-24,Rent,25000.0
+02-11-24,Groceries,5400.0
+06-11-24,Dining Out,6800.0
+10-11-24,Gifts,12000.0
+14-11-24,Personal Care,3800.0
+18-11-24,Healthcare,6100.0
+22-11-24,Subscriptions,1200.0
+26-11-24,Rent,25000.0
+30-11-24,Transportation,4500.0
+05-12-24,Groceries,5600.0
+09-12-24,Fuel,9200.0
+13-12-24,Travel,20000.0
+17-12-24,Shopping,16000.0
+21-12-24,Education,10000.0
+25-12-24,Utilities,8000.0
+29-12-24,Rent,25000.0
+03-01-25,Groceries,5800.0
+07-01-25,Dining Out,7200.0
+11-01-25,Home Maintenance,9500.0
+15-01-25,Healthcare,6400.0
+19-01-25,Entertainment,7100.0
+23-01-25,Fuel,9500.0
+27-01-25,Rent,25000.0
+31-01-25,Insurance,20000.0
+04-02-25,Groceries,6000.0
+08-02-25,Utilities,8200.0
+12-02-25,Personal Care,4000.0
+16-02-25,Shopping,17000.0
+20-02-25,Gifts,13000.0
+24-02-25,Rent,25000.0
+28-02-25,Transportation,4800.0
+05-03-25,Groceries,6200.0
+09-03-25,Fuel,9800.0
+13-03-25,Education,10000.0
+17-03-25,Travel,22000.0
+21-03-25,Healthcare,6700.0
+25-03-25,Rent,25000.0
+29-03-25,Subscriptions,1200.0
+02-04-25,Groceries,6500.0
+06-04-25,Utilities,8500.0
+10-04-25,Dining Out,7500.0
+14-04-25,Home Maintenance,10000.0
+18-04-25,Shopping,18000.0
+22-04-25,Entertainment,7500.0
+26-04-25,Rent,25000.0
+30-04-25,Insurance,20000.0
+05-05-25,Groceries,6800.0
+09-05-25,Fuel,10200.0
+13-05-25,Personal Care,4200.0
+17-05-25,Travel,24000.0
+21-05-25,Education,10000.0
+25-05-25,Rent,25000.0
+29-05-25,Gifts,14000.0
+03-06-25,Groceries,7000.0
+07-06-25,Utilities,8800.0
+11-06-25,Healthcare,7000.0
+15-06-25,Shopping,19000.0
+19-06-25,Dining Out,7800.0
+23-06-25,Rent,25000.0
+27-06-25,Transportation,5200.0
+02-07-25,Groceries,7200.0
+06-07-25,Fuel,10500.0
+10-07-25,Entertainment,7800.0
+14-07-25,Home Maintenance,11000.0
+18-07-25,Subscriptions,1200.0
+22-07-25,Rent,25000.0
+26-07-25,Insurance,20000.0
+30-07-25,Travel,26000.0
+04-08-25,Groceries,7500.0
+08-08-25,Utilities,9200.0
+12-08-25,Shopping,20000.0
+16-08-25,Personal Care,4500.0
+20-08-25,Education,10000.0
+24-08-25,Rent,25000.0
+28-08-25,Gifts,15000.0
+02-09-25,Groceries,7800.0
+06-09-25,Fuel,10800.0
+10-09-25,Dining Out,8100.0
+14-09-25,Healthcare,7300.0
+18-09-25,Entertainment,8500.0
+22-09-25,Rent,25000.0
+26-09-25,Transportation,5500.0
+30-09-25,Home Maintenance,12000.0
+05-10-25,Groceries,8000.0
+09-10-25,Utilities,9500.0
+13-10-25,Travel,28000.0
+17-10-25,Shopping,21000.0
+21-10-25,Subscriptions,1200.0
+25-10-25,Rent,25000.0
+29-10-25,Insurance,20000.0
+03-11-25,Groceries,8200.0
+07-11-25,Fuel,11000.0
+11-11-25,Education,10000.0
+15-11-25,Dining Out,8400.0
+19-11-25,Personal Care,4800.0
+23-11-25,Rent,25000.0
+27-11-25,Gifts,16000.0
+02-12-25,Groceries,8500.0
+06-12-25,Utilities,9800.0
+10-12-25,Healthcare,7500.0
+14-12-25,Entertainment,9000.0
+18-12-25,Shopping,22000.0
+22-12-25,Rent,25000.0
+26-12-25,Travel,30000.0
+30-12-25,Home Maintenance,13000.0

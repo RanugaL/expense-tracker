@@ -1,42 +1,94 @@
-import utils
+import utils, db
+import charts
 
-if __name__ == '__main__':
-    interface = ["n - add new expense",
-                 "l - list expense records",
-                 "t - show total expenses",
-                 "c - show expenses for category",
-                 "r - view expense report",
-                 "q - Exit app"]
+def menu():
+    print("1 - Add new expense")
+    print("2 - List all expenses")
+    print("3 - Delete an expense")
+    print("4 - View categoric report (chart)")
+    print("5 - View monthly report (chart)")
+    print("6 - Show latest expense")
+    print("0 - Exit App")
+    return input("Choose an action: ")
 
-    filename = utils.get_file()
+
+def main():
+
+    # initialise database and get username
+    db.init_db()
+    user_data = utils.get_user()
+    user_id = user_data[0][0]
+    username = user_data[0][1]
+
     while True:
-        print()
-        for row in interface:
-            print(row)
-        operation = input("Enter option: ").lower()
-        if operation == 'l':
-            utils.view_expenses(filename)
-        elif operation == 'n':
-            try:
-                amount = float(input("Enter amount of expense: Rs."))
-                category = input("Enter expense category: ").lower()
-                utils.add_expense(amount, category,filename)
-            except TypeError:
-                print("Value entered was not a float")
 
-        elif operation == 't':
-            utils.show_total_expenses(filename)
-        elif operation == 'c':
-            category= input("Enter category: ").lower()
-            utils.show_total_expenses(filename, category)
-        elif operation == 'r':
-            print("1 - Categoric Report\n" + "2 - Monthly Report")
-            report_choice = input("Enter your choice (1/2): ")
-            if report_choice == "1":
-                utils.show_categoric_report(filename)
+        # Get action from menu func
+        option = menu() #
+
+        # Perform selected action
+
+        if option == '1': # Add new expense
+
+            # Get and validate values for the expense
+            amount: float  = utils.input_amount("Enter expense amount: Rs.")
+            # returns -1 if invalid type, -2 if amount is negative else returns amount
+            if amount == -1:
+                print("❌ Invalid Input for amount")
+                continue
+            elif amount == -2:
+                print("❌ amount cant be negative")
+                continue
+            category: str = input("Enter category of expense: ")
+            desc: str = input("Enter a description for the expense: ")
+            date = utils.get_today()
+
+            # Add expense to database with user-id
+            db.add_expense(user_id, date,category, amount,desc)
+            print("✅ Expense added!")
+
+        elif option == '2':
+            # Prints each expense for a certain user
+            print("-------------------")
+            print(f"Expenses of {username}")
+            data_query = db.get_all_expenses(user_id)
+            for row in data_query:
+                print(f" {row[0]} | {row[2]} | {row[3]} | Rs.{row[4]:.2f} | {row[5]} ")
+            print("-------------------")
+        elif option == '3':
+            print("-------------------")
+            id = utils.input_numId("Enter id of expense to delete: ")
+            if id == -1 :
+                print("Invalid Input")
+            elif id == -2:
+                print("Enter a positive id")
             else:
-                year = int(input("Enter your desired year: "))
-                utils.show_timely_report(filename, year)
-        elif operation == 'q':
+                db.delete_expense_by_id(id,user_id)
+
+        elif option == '4':
+            # Plots a chart of total expenses for each category
+            data_query = db.get_expenses_grouped_by_category(user_id)
+            charts.show_categoric_report(data_query, username)
+        elif option == '5':
+            # Plots a chart of total expenses for each month in a certain year
+            year = utils.get_year("Enter year: ")
+            if year == -1:
+                print("❌ Invalid Year")
+            elif year == -2:
+                print("❗ Year out of bounds(1950-2100)")
+            else:
+                data = db.get_expenses_grouped_by_month(user_id,year)
+                charts.show_timely_report(data,year)
+        elif option == '6':
+            # Prints latest expense of a certain user
+            print("-------------------")
+            print(f"Latest Expense of {username}")
+            data_query = db.get_latest_expense(user_id)
+            data = data_query[0]
+            print(f" {data[0]} | {data[2]} | {data[3]} | Rs.{data[4]:.2f} | {data[5]} ") # data(1) is user id so its not printed
+            print("-------------------")
+        elif option == '0':
             print("Exiting...")
             break
+
+if __name__ == '__main__':
+    main()
