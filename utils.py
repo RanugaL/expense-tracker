@@ -30,9 +30,21 @@ def input_amount(prompt):
         else:
             return -2
 
+def input_numId(prompt):
+    num = input(prompt)
+    try:
+        amount = int(num)
+    except (TypeError, ValueError):
+        return -1
+    else:
+        if amount > 0:
+            return amount
+        else:
+            return -2
+
 
 def get_today():
-    return datetime.today().strftime("%d-%m-%y")
+    return datetime.today().strftime("%Y-%m-%d")
 
 def get_year(prompt):
     year = input(prompt)

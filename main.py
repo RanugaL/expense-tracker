@@ -4,9 +4,10 @@ import charts
 def menu():
     print("1 - Add new expense")
     print("2 - List all expenses")
-    print("3 - Delete an Expense")
+    print("3 - Delete an expense")
     print("4 - View categoric report (chart)")
     print("5 - View monthly report (chart)")
+    print("6 - Show latest expense")
     print("0 - Exit App")
     return input("Choose an action: ")
 
@@ -18,7 +19,6 @@ def main():
     user_data = utils.get_user()
     user_id = user_data[0][0]
     username = user_data[0][1]
-    print(user_data)
 
     while True:
 
@@ -52,10 +52,17 @@ def main():
             print(f"Expenses of {username}")
             data_query = db.get_all_expenses(user_id)
             for row in data_query:
-                print(f"{row[0]}|{row[2]}|{row[3]}|{row[4]}|{row[5]}")
+                print(f" {row[0]} | {row[2]} | {row[3]} | Rs.{row[4]:.2f} | {row[5]} ")
             print("-------------------")
         elif option == '3':
-            pass
+            print("-------------------")
+            id = utils.input_numId("Enter id of expense to delete: ")
+            if id == -1 :
+                print("Invalid Input")
+            elif id == -2:
+                print("Enter a positive id")
+            else:
+                db.delete_expense_by_id(id,user_id)
 
         elif option == '4':
             # Plots a chart of total expenses for each category
@@ -71,7 +78,14 @@ def main():
             else:
                 data = db.get_expenses_grouped_by_month(user_id,year)
                 charts.show_timely_report(data,year)
-
+        elif option == '6':
+            # Prints latest expense of a certain user
+            print("-------------------")
+            print(f"Latest Expense of {username}")
+            data_query = db.get_latest_expense(user_id)
+            data = data_query[0]
+            print(f" {data[0]} | {data[2]} | {data[3]} | Rs.{data[4]:.2f} | {data[5]} ") # data(1) is user id so its not printed
+            print("-------------------")
         elif option == '0':
             print("Exiting...")
             break

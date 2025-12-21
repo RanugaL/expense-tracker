@@ -20,25 +20,24 @@ def show_categoric_report(data,username):
         plt.show()
 
 def show_timely_report(data,year):
-    print(data)
-        # x=[]
-        # y=[]
-        # for month in data:
-        #     x.append(month[0])
-        #     y.append(month[1])
-        #
-        #
-        # plt.bar(x, y, color="orange")
-        # add_labels(x, y)
-        # plt.title(f'Expense Report of {year}')
-        # plt.xlabel('Month')
-        # plt.ylabel('Amount (Rs.)')
-        #
-        # # after plotting the data, format the labels
-        # current_values = plt.gca().get_yticks()
-        # plt.gca().set_yticklabels(['{:,.0f}'.format(x) for x in current_values])
-        #
-        # plt.show()
+    x=[]
+    y=[]
+    for month in data:
+        x.append(month[0])
+        y.append(month[1])
+
+
+    plt.bar(x, y, color="orange")
+    add_labels(x, y)
+    plt.title(f'Expense Report of {year}')
+    plt.xlabel('Month')
+    plt.ylabel('Amount (Rs.)')
+
+    # after plotting the data, format the labels
+    current_values = plt.gca().get_yticks()
+    plt.gca().set_yticklabels(['{:,.0f}'.format(x) for x in current_values])
+
+    plt.show()
 
 
 def add_labels(x, y):
